@@ -68,7 +68,6 @@ Maplify leverages NASA datasets and open-source geospatial tools to:
 - **Normalizes all inputs to 0–100**  
 - **Weighted formula:**
 
-```python
 MAPLIFY_SCORE = round(
     commute_score * 0.25 +
     flood_score   * 0.25 +
@@ -77,31 +76,39 @@ MAPLIFY_SCORE = round(
     green_score   * 0.15
 )
 
-Reproducibility
+---
 
-Fully documented pipeline (clip, aggregate, normalize, score)
+## Reproducibility
 
-Sample files in /layers/ for demonstration
+- Fully documented pipeline (clip, aggregate, normalize, score)
+- Sample files in /layers/ for demonstration
+- Python script recomputes scores automatically
 
-Python script recomputes scores automatically
+---
 
+## Educational / Demonstration Value
 
-Educational / Demonstration Value
-
-Showcases satellite-based urban analytics
-
-Allows judges to reproduce demo in <30 minutes
-
-
+- Showcases satellite-based urban analytics
+- Allows judges to reproduce demo in <30 minutes
 
 ---
 
 ### 🎨 Design & Prototype
 
-**Interactive Figma Prototype: https://www.figma.com/proto/cqyDQmR0e3cW0tEZN9aSk3/Untitled?node-id=1-516&t=ydsYsXawm4NT5H6u-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A516&show-proto-sidebar=1**
+**Interactive Figma Prototype:** [https://www.figma.com/proto/cqyDQmR0e3cW0tEZN9aSk3/Untitled?node-id=1-516&t=ydsYsXawm4NT5H6u-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A516&show-proto-sidebar=1](https://www.figma.com/proto/cqyDQmR0e3cW0tEZN9aSk3/Untitled?node-id=1-516&t=ydsYsXawm4NT5H6u-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A516&show-proto-sidebar=1)
 
-**Demo Video (≤30s): https://youtu.be/wSpl_mq3RM0**
+**Demo Video (≤30s):** [https://youtu.be/wSpl_mq3RM0](https://youtu.be/wSpl_mq3RM0)
 
+---
+
+## 📐 Reproducible Steps
+
+1. Download NASA data for your bounding box (VIIRS, IMERG, MODIS NDVI/LST, AOD, GPW)
+
+2. Clip to area of interest using GDAL:
+
+```bash
+gdalwarp -te <lonmin> <latmin> <lonmax> <latmax> input.tif output_clip.tif
 
 
 ---
