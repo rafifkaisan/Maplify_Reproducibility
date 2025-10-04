@@ -1,0 +1,25 @@
+# Replace BBOX coords with your demo bbox
+
+# 1) Clip VIIRS tile to demo bbox (GDAL)
+gdalwarp -te 90.33 23.69 90.45 23.80 -t_srs EPSG:4326 VIIRS_BlackMarble_YYYYMM.tif layers/viirs_clip.tif
+gdal_translate -of PNG -scale layers/viirs_clip.tif layers/viirs_clip.png
+
+# 2) IMERG 30-day total using xarray (Python)
+python - <<'PY'
+import xarray as xr
+import rioxarray
+ds = xr.open_mfdataset('imerg_*.nc', combine='by_coords')
+# variable name may be 'precipitationCal' or 'precipitation' depending on product
+precip_var = 'precipitationCal' if 'precipitationCal' in ds.data_vars else list(ds.data_vars)[0]
+rain_30d = ds[precip_var].sel(time=slice('2025-08-01','2025-08-31')).sum('time')
+rain_30d.rio.to_raster('layers/imerg_30d.tif')
+PY
+
+# 3) NDVI average (MODIS stack) - use rasterio or GEE
+# Example (pseudo): compute mean NDVI from a stack and export ndvi_mean.tif
+
+# 4) Convert flood raster mask -> GeoJSON polygons (GDAL)
+gdal_polygonize.py flood_mask.tif -f GeoJSON layers/flood_polygons.geojson
+
+# 5) Compute MAPLIFY score
+python scripts/compute_maplify_score.py --input seed_listings.csv --output seed_listings_with_scores.json
