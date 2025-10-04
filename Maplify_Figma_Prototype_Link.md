@@ -21,10 +21,6 @@ https://www.figma.com/proto/cqyDQmR0e3cW0tEZN9aSk3/Untitled?node-id=1-516&amp;t=
 
 ---
 
-## 🗂 Folder Structure Reference
-
-prototypes/ └── Maplify_Prototype_Link.md
-
 ---
 
 Thank you for reviewing the design! 🚀
