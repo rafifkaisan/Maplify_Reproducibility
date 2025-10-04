@@ -2,7 +2,7 @@
 
 **Repository:** Maplify — *Smarter Cities, Greener Futures*  
 **Team:** Team Chronos (Bangladesh)  
-**Lead:** Rafif Kaisan Bhuiyan  
+**Lead Data Scientist:** Rafif Kaisan Bhuiyan  
 
 ---
 
