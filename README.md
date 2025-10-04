@@ -27,3 +27,10 @@ All satellite data used are open NASA products; we document product names, proce
 - NASA POWER — climate/weather context
 
 ## MAPLIFY_SCORE (formula)
+MAPLIFY_SCORE = round(
+commute_score * 0.25 +
+flood_score * 0.25 +
+pollution_score * 0.20 +
+density_score * 0.15 +
+green_score * 0.15
+)
