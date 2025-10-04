@@ -62,9 +62,11 @@ Maplify leverages NASA datasets and open-source geospatial tools to:
 - **AOD:** Pollution proxy  
 - **SEDAC GPW:** Population density  
 
-### MAPLIFY Score Computation
+---
 
-- Normalizes all inputs to 0–100  
+## 🧮 MAPLIFY Score Computation
+
+- **Normalizes all inputs to 0–100**  
 - **Weighted formula:**
 
 ```python
@@ -97,9 +99,9 @@ Allows judges to reproduce demo in <30 minutes
 
 🎨 Design & Prototype
 
-Interactive Figma Prototype: https://www.figma.com/proto/cqyDQmR0e3cW0tEZN9aSk3/Untitled?node-id=1-516&amp;t=ydsYsXawm4NT5H6u-1&amp;scaling=min-zoom&amp;content-scaling=fixed&amp;page-id=0%3A1&amp;starting-point-node-id=1%3A516&amp;show-proto-sidebar=1
+Interactive Figma Prototype: Maplify Demo Figma
 
-Demo Video (≤30s): https://youtu.be/wSpl_mq3RM0
+Demo Video (≤30s): YouTube Link
 
 
 
@@ -151,6 +153,10 @@ lst_anomaly.tif	Land surface temperature anomaly
 > Use placeholders if full-resolution NASA tiles aren’t available. Judges need only sample layers for reproducibility.
 
 
+
+
+---
+
 🛠️ Scripts
 
 scripts/commands.txt → GDAL and Python commands to process NASA layers
@@ -174,6 +180,8 @@ data_appendix.pdf → Worked example: Housing Score for “Dhanmondi Studio”
 Includes raw inputs, normalization, weighted computation, and interpretation
 
 Step-by-step commands for reproducibility
+
+______
 
 
 ⚖️ Credit & License
