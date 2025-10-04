@@ -96,7 +96,7 @@ Allows judges to reproduce demo in <30 minutes
 
 ---
 
-🎨 Design & Prototype
+## 🎨 Design & Prototype
 
 Interactive Figma Prototype: https://www.figma.com/proto/cqyDQmR0e3cW0tEZN9aSk3/Untitled?node-id=1-516&t=ydsYsXawm4NT5H6u-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A516&show-proto-sidebar=1
 
