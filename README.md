@@ -64,127 +64,67 @@ Maplify leverages NASA datasets and open-source geospatial tools to:
 
 ---
 
-## 🧮 MAPLIFY Score Computation
-
-- **Normalizes all inputs to 0–100**  
-- **Weighted formula:**
-
-```python
-MAPLIFY_SCORE = round(
-    commute_score * 0.25 +
-    flood_score   * 0.25 +
-    pollution_score * 0.20 +
-    density_score * 0.15 +
-    green_score   * 0.15
-)
-
-Reproducibility
-
-Fully documented pipeline (clip, aggregate, normalize, score)
-
-Sample files in /layers/ for demonstration
-
-Python script recomputes scores automatically
-
-
-Educational / Demonstration Value
-
-Showcases satellite-based urban analytics
-
-Allows judges to reproduce demo in <30 minutes
-
-
-
----
-
-🎨 Design & Prototype
-
-Interactive Figma Prototype: Maplify Demo Figma
-
-Demo Video (≤30s): YouTube Link
-
-
-
----
-
-📐 Reproducible Steps
-
-1. Download NASA data for your bounding box (VIIRS, IMERG, MODIS NDVI/LST, AOD, GPW)
-
-
-2. Clip to area of interest using GDAL:
-
-
-
-gdalwarp -te <lonmin> <latmin> <lonmax> <latmax> input.tif output_clip.tif
-
-3. Aggregate IMERG to 24h/30d totals using Python xarray
-
-
-4. Compute NDVI mean & LST anomalies from MODIS stacks
-
-
-5. Run MAPLIFY score script:
-
-
-
-python scripts/compute_maplify_score.py \
-  --input seed_listings.csv \
-  --output-json seed_listings_scored.json \
-  --output-csv seed_listings_scored.csv
-
-6. Export demo tiles for /layers/ folder
-
-
-
-
----
-
-📂 /layers/ Example Files
-
-File	Description
-
-viirs_clip.png	Sample VIIRS Black Marble tile
-imerg_30d.tif	Aggregated 30-day precipitation
-ndvi_mean.tif	Average NDVI raster
-lst_anomaly.tif	Land surface temperature anomaly
-
-
-> Use placeholders if full-resolution NASA tiles aren’t available. Judges need only sample layers for reproducibility.
-
-
-
-
----
-
-🛠️ Scripts
-
-scripts/commands.txt → GDAL and Python commands to process NASA layers
-
-scripts/compute_maplify_score.py → Python 3 script to compute scores from CSV
-
-
-> Make script executable:
-
-
-
-chmod +x scripts/compute_maplify_score.py
-
-
----
-
-📚 Documentation & Data Appendix
-
-data_appendix.pdf → Worked example: Housing Score for “Dhanmondi Studio”
-
-Includes raw inputs, normalization, weighted computation, and interpretation
-
-Step-by-step commands for reproducibility
-
-______
-
-
-⚖️ Credit & License
-
-All satellite data: NASA / U.S. Government
-This repo demonstrates usage of open NASA datasets for educational & reproducibility purposes.
+#!/usr/bin/env python3
+"""
+Maplify Score Computation Script
+Author: Rafif Kaisan Bhuiyan
+Team: Team Chronos
+Purpose: Compute MAPLIFY_SCORE for sample neighborhoods using CSV/JSON inputs.
+"""
+
+import pandas as pd
+import json
+import argparse
+
+def compute_maplify_score(row):
+    """
+    Compute the MAPLIFY_SCORE using weighted formula.
+    Inputs are assumed to be normalized 0-100.
+    """
+    return round(
+        row['commute_score'] * 0.25 +
+        row['flood_score'] * 0.25 +
+        row['pollution_score'] * 0.20 +
+        row['density_score'] * 0.15 +
+        row['green_score'] * 0.15
+    )
+
+def load_csv(file_path):
+    """Load CSV file into pandas DataFrame"""
+    return pd.read_csv(file_path)
+
+def save_csv(df, file_path):
+    """Save pandas DataFrame to CSV"""
+    df.to_csv(file_path, index=False)
+
+def save_json(df, file_path):
+    """Save pandas DataFrame to JSON"""
+    df.to_json(file_path, orient='records', indent=4)
+
+def main(input_csv, output_csv, output_json):
+    # Load input CSV
+    df = load_csv(input_csv)
+
+    # Check required columns exist
+    required_cols = ['commute_score', 'flood_score', 'pollution_score', 'density_score', 'green_score']
+    for col in required_cols:
+        if col not in df.columns:
+            raise ValueError(f"Missing required column: {col}")
+
+    # Compute MAPLIFY_SCORE for each row
+    df['MAPLIFY_SCORE'] = df.apply(compute_maplify_score, axis=1)
+
+    # Save outputs
+    save_csv(df, output_csv)
+    save_json(df, output_json)
+
+    print(f"✅ MAPLIFY_SCORE computed and saved to:\n  CSV: {output_csv}\n  JSON: {output_json}")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Compute MAPLIFY_SCORE for input CSV.")
+    parser.add_argument("--input", required=True, help="Input CSV file with scores")
+    parser.add_argument("--output-csv", required=True, help="Output CSV file with MAPLIFY_SCORE")
+    parser.add_argument("--output-json", required=True, help="Output JSON file with MAPLIFY_SCORE")
+
+    args = parser.parse_args()
+    main(args.input, args.output_csv, args.output_json)
