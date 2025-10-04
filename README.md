@@ -97,9 +97,9 @@ Allows judges to reproduce demo in <30 minutes
 
 🎨 Design & Prototype
 
-Interactive Figma Prototype: Maplify Demo Figma
+Interactive Figma Prototype: https://www.figma.com/proto/cqyDQmR0e3cW0tEZN9aSk3/Untitled?node-id=1-516&amp;t=ydsYsXawm4NT5H6u-1&amp;scaling=min-zoom&amp;content-scaling=fixed&amp;page-id=0%3A1&amp;starting-point-node-id=1%3A516&amp;show-proto-sidebar=1
 
-Demo Video (≤30s): YouTube Link
+Demo Video (≤30s): https://youtu.be/wSpl_mq3RM0
 
 
 
