@@ -34,3 +34,22 @@ pollution_score * 0.20 +
 density_score * 0.15 +
 green_score * 0.15
 )
+
+Normalization examples are in `data_appendix.pdf`.
+
+## Processing steps
+1. Download NASA product tiles for your bbox.  
+2. Clip with `gdalwarp -te`.  
+3. Aggregate IMERG with xarray.  
+4. Compute NDVI mean and LST anomaly.  
+5. Compute MAPLIFY_SCORE using `compute_maplify_score.py`.  
+6. Export small PNG/GeoTIFF tiles into `/layers/`.
+
+## Limitations
+- MODIS NDVI resolution 250–1000 m; Sentinel-2 recommended for validation.
+- AOD→PM₂.₅ is a proxy; calibrate locally.
+- IMERG thresholds vary; calibrate flood alerts locally.
+
+## Credit & License
+All satellite data and imagery: **NASA / U.S. Government**.  
+This repo demonstrates usage of NASA open data. Please cite datasets on visuals (e.g., “Data: NASA GPM IMERG (2025)”).  
