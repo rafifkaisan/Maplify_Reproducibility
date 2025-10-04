@@ -63,15 +63,6 @@ Maplify leverages NASA datasets and open-source geospatial tools to:
 - **SEDAC GPW:** Population density  
 
 ---
-
-# Maplify_Reproducibility — NASA Space Apps 2025
-
-**Repository:** Maplify — *Smarter Cities, Greener Futures*  
-**Team:** Team Chronos (Bangladesh)  
-**Lead:** Rafif Kaisan Bhuiyan
-
----
-
 ## 🧮 MAPLIFY Score Computation
 
 - **Normalizes all inputs to 0–100**  
